@@ -2,7 +2,37 @@
     "name": "calendar-module",
     "version": "0.1.0",
     "private": true,
+    "importSort": {
+        ".js, .jsx, .ts, .tsx": {
+            "style": "module",
+            "parser": "typescript",
+            "options": {
+                "groups": [
+                    [
+                        "^react",
+                        "^react-dom",
+                        "^redux",
+                        "^@?\\w",
+                        "^@portal",
+                        "^components",
+                        "^services",
+                        "^utils",
+                        "^constants",
+                        "^config",
+                        "^interfaces",
+                        "^assets",
+                        "^pages",
+                        "^[./]"
+                    ],
+                    [
+                        "\\u0000"
+                    ]
+                ]
+            }
+        }
+    },
     "dependencies": {
+        "@reduxjs/toolkit": "^1.9.5",
         "@testing-library/jest-dom": "^5.17.0",
         "@testing-library/react": "^13.4.0",
         "@testing-library/user-event": "^13.5.0",
@@ -10,6 +40,7 @@
         "@types/node": "^16.18.39",
         "@types/react": "^18.2.17",
         "@types/react-dom": "^18.2.7",
+        "axios": "^1.4.0",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
         "react-redux": "^8.1.1",
@@ -41,7 +72,8 @@
         "start": "react-scripts start",
         "build": "react-scripts build",
         "test": "react-scripts test",
-        "eject": "react-scripts eject"
+        "eject": "react-scripts eject",
+        "format": "prettier --write \"src/**/*.+(ts|tsx|js|jsx|json|css|md)\" --ignore-path .prettierignore"
     },
     "eslintConfig": {
         "extends": [
