@@ -1,7 +1,7 @@
-import { useWindowSize } from '../../hooks/useWindowSize'
+import { useResizeObserver } from '../../hooks/useResizeObserver'
 import './y-axis-scroller.scss'
 
-import React, {ReactNode} from 'react'
+import React, {ReactNode, useRef} from 'react'
 
 
 interface IYAxisScroller {
@@ -9,25 +9,26 @@ interface IYAxisScroller {
     children: string | JSX.Element | JSX.Element[] | ReactNode
     onScroll?: Function
     className?: string
-    calculatedStickyTopHeight: number
+    scrollHeight?: number
 }
 
 const YAxisScroller: React.FC<IYAxisScroller> = props => {
-    const {elementId, onScroll, className, children, calculatedStickyTopHeight = 0} = props
-    const windowSize = useWindowSize()
+    const {elementId, onScroll, className, children, scrollHeight} = props
+    const divElementRef = useRef<HTMLDivElement>(null)
+    const [parentHeight] = useResizeObserver(divElementRef, true, true)
 
   
     return (
-        <div className="y-axis-scroller-wrapper">
+        <div className="y-axis-scroller-wrapper" ref={divElementRef}>
             <div
                 className={className}
                 onScroll={e => onScroll && onScroll(e)}
                 style={{
-                    height: windowSize.height - calculatedStickyTopHeight,
+                    height: scrollHeight ? scrollHeight : parentHeight ? parentHeight : `auto`,
                     overflowY: 'auto',
                 }}
                 id={elementId}
-                key={'k_'+elementId}
+                key={elementId+'_key'}
             >
                 {children}
             </div>
