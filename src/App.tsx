@@ -1,29 +1,28 @@
-import './App.css'
+import './App.scss'
 
 import React, {useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 
+import {CALENDAR_NOTIFICATION_API_ENDPOINT} from './common/constants/apiURLs'
 import logo from './logo.svg'
 import {fetchPosts} from './redux/reducers/postsSlice'
 import {RootState} from './redux/reducers/reducers'
 import {ICalendarNotification} from './redux/schemas/CalendarNotification'
 
 function App() {
+    //todo add toast
     const {data, loading, error} = useSelector((state: RootState) => state.posts)
     const dataArr: ICalendarNotification[] = data?.value ?? []
     const dispatch = useDispatch<any>()
 
     useEffect(() => {
-        dispatch(fetchPosts())
+        dispatch(fetchPosts(CALENDAR_NOTIFICATION_API_ENDPOINT))
     }, [dispatch])
 
     if (loading === 'pending') {
         return <p>Loading...</p>
     }
 
-    if (error) {
-        return <p>Error: {error}</p>
-    }
     return (
         <div className="App">
             <header className="App-header">
