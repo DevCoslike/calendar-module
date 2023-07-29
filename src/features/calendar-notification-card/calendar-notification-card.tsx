@@ -1,33 +1,49 @@
 import './calendar-notification-card.scss'
 
-import {useEffect} from 'react'
-import {useDispatch, useSelector} from 'react-redux'
+import {useEffect, useState} from 'react'
+import {useSelector} from 'react-redux'
 
+import {ErrorLoadingFailed} from '../../common/components/error-loading/error-loading-failed'
 import {BsmListBox} from '../../common/components/listbox/bsm-listbox'
 import {RootState} from '../../redux/reducers/reducers'
 import {ICalendarNotification} from '../../redux/schemas/CalendarNotification'
 
 export const CalendarNotificationCard = () => {
-    //todo add toast
+    const [selectedItem, setSelectedItem] = useState<ICalendarNotification | null>()
+    useEffect(() => {
+        console.log(selectedItem)
+    }, [selectedItem])
+
     const {data, loading, error} = useSelector((state: RootState) => state.posts)
 
     const dataArr: ICalendarNotification[] = data?.value ?? []
     const items = dataArr.map(item => ({label: item.Title, value: item}))
 
-    if (loading === 'pending') {
-        return <p>Loading...</p>
+    if (loading === 'failed') {
+        return <ErrorLoadingFailed error={error ?? ''} />
     }
 
-    return (
+    return loading === 'succeeded' ? (
         <div className="calendar-notification-card-wrapper">
-            <h2>Virtual Scroll (100000 Items)</h2>
-            <BsmListBox
-                elementId="lsBoxItems"
-                options={items}
-                //onChange={e => setSelectedItem(e.value)}
-                style={{width: '15rem'}}
-                listStyle={{height: '250px'}}
-            />
+            <div className="container-fluid py-1">
+                <div className="row">
+                    <h2>
+                        <i className="pi pi-calendar pe-1 h2i" />
+                        Upcoming Events
+                    </h2>
+                </div>
+                <div className="row">
+                    <BsmListBox
+                        elementId="lsBoxItems"
+                        options={items}
+                        onChange={e => setSelectedItem(e.value)}
+                        style={{maxWidth: '380px'}}
+                        listStyle={{maxHeight: '230px'}}
+                    />
+                </div>
+            </div>
         </div>
+    ) : (
+        <></>
     )
 }
