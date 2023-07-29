@@ -72,11 +72,15 @@
         "typescript": "^4.8.4"
     },
     "scripts": {
-        "start": "react-scripts start",
-        "build": "react-scripts build",
+        "start": "react-scripts start --watch",
+        "build": "tsc",
+        "postbuild": " npm run copy-sass && npm run build-sass && npm run copy-files",
+        "copy-files": "copyfiles -f package.json dist",
+        "copy-sass": "copyfiles -f src/styles/**/* dist/styles",
         "test": "react-scripts test",
         "eject": "react-scripts eject",
-        "format": "prettier --write \"src/**/*.+(ts|tsx|js|jsx|json|css|md)\" --ignore-path .prettierignore"
+        "format": "prettier --write \"src/**/*.+(ts|tsx|js|jsx|json|css|md)\" --ignore-path .prettierignore",
+        "build-sass": "sass --load-path=./node_modules --load-path=./ src/styles/base-theme.scss dist/styles/base-theme.scss"
     },
     "eslintConfig": {
         "extends": [

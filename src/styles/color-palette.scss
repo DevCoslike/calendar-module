@@ -1,0 +1,36 @@
+$palette: (
+    white: rgb(255, 255, 255),
+    black: rgb(0, 0, 0),
+    blacktextnormal: rgb(51, 51, 51),
+    clink: rgb(3, 120, 124),
+    clinkhover: rgb(213, 17, 31),
+    cbackground: rgb(243, 242, 241),
+    cbackgroundhover: rgb(237, 235, 233),
+);
+
+/**
+ * Returns the color with the given transparency.
+ * Colors are defined in the $palette
+ * Given transparency should be in the list defined in the function else it returns with transparency 1
+ * Given color should be defined in $palette else returns black with transparency 1
+ * Usage: background: palette(black, 20);
+ */
+@function palette($color, $tone) {
+    //@warn map-get($palette,$color);
+
+    $transparency-list: 100, 80, 65, 55, 30, 20, 10, 8, 5, 2, 0;
+    @if map-has-key($palette, $color) {
+        $color: map-get($palette, $color);
+        @if (null != index($transparency-list, $tone)) {
+            $transparency: $tone * 0.01;
+            @return rgba($color, $transparency);
+        }
+
+        @warn "unknown tone `#{$tone}` in color";
+        @return rgba($color, 1);
+    }
+
+    @warn "unknown color `#{$color}` in palette";
+    $color: map-get($palette, black);
+    @return rgba($color, 1);
+}

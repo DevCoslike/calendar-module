@@ -1,0 +1,27 @@
+@import 'src/styles/color-palette';
+@import 'src/styles/mixins';
+
+.bsm-list-box-wrapper {
+    @include textGlobalStyle();
+    .zebra-list .p-listbox-item {
+        background-color: palette(white, 100); /* Set the background color for even-numbered items */
+    }
+
+    .zebra-list .p-listbox-item:nth-child(odd) {
+        background-color: palette(cbackground, 100); /* Set the background color for odd-numbered items */
+    }
+
+    .p-listbox .p-listbox-list {
+        padding: 0;
+    }
+    .p-listbox.p-component {
+        background: inherit;
+        border: none;
+    }
+
+    .p-listbox:not(.p-disabled) .p-listbox-item:not(.p-highlight):not(.p-disabled) {
+        &:hover {
+            color: palette(backgroundhover, 100);
+        }
+    }
+}

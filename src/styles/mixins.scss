@@ -1,0 +1,8 @@
+@import 'color-palette';
+
+$font-size: 0.875rem;
+
+@mixin textGlobalStyle() {
+    font-size: $font-size;
+    color: palette(blacktextnormal, 100);
+}

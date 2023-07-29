@@ -1,3 +1,24 @@
+h2,
+.h2 {
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+*::-webkit-scrollbar {
+    width: 0.25em;
+    height: 0.25em;
+}
+
+*::-webkit-scrollbar-track {
+    background: palette(black, 10);
+    border: none;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: palette(black, 20);
+    border-radius: 0px;
+}
+
+// apps
 .App {
     text-align: center;
 }

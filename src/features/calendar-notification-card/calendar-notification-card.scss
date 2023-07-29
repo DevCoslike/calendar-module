@@ -1,0 +1,9 @@
+@import 'src/styles/color-palette';
+@import 'src/styles/mixins';
+
+.calendar-notification-card-wrapper {
+    position: fixed; /* or "absolute" if you want it to scroll with the page */
+    bottom: 20px; /* Adjust this value to control the distance from the bottom */
+    right: 20px; /* Adjust this value to control the distance from the right */
+    background-color: palette(white, 100);
+}
