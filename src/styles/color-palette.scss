@@ -1,6 +1,6 @@
 $palette: (
-    white: rgb(255, 255, 255),
-    black: rgb(0, 0, 0),
+    white: #fff,
+    black: #000,
     blacktextnormal: rgb(51, 51, 51),
     clink: rgb(3, 120, 124),
     clinkhover: rgb(213, 17, 31),
@@ -16,8 +16,6 @@ $palette: (
  * Usage: background: palette(black, 20);
  */
 @function palette($color, $tone) {
-    //@warn map-get($palette,$color);
-
     $transparency-list: 100, 80, 65, 55, 30, 20, 10, 8, 5, 2, 0;
     @if map-has-key($palette, $color) {
         $color: map-get($palette, $color);

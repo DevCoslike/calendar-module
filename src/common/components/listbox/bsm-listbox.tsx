@@ -11,7 +11,9 @@ export const BsmListBox: React.FC<ListBoxProps> = (props: ListBoxProps) => {
     const {elementId, isZebraStyledList = true, ...listBoxProps} = props
     return (
         <div className="bsm-list-box-wrapper">
-            <PrimeListBox {...listBoxProps} id={elementId} className={`${isZebraStyledList} ? 'zebra-list' : ''`} />
+            <div className={`${isZebraStyledList ? 'zebra-list' : ''} `}>
+                <PrimeListBox {...listBoxProps} id={elementId} listClassName="App-link" />
+            </div>
         </div>
     )
 }

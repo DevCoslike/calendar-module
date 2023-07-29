@@ -6,3 +6,9 @@ $font-size: 0.875rem;
     font-size: $font-size;
     color: palette(blacktextnormal, 100);
 }
+@mixin linkGlobalStyle() {
+    color: palette(clink, 100);
+    &:hover {
+        color: palette(clinkhover, 100);
+    }
+}

@@ -2,7 +2,6 @@
 @import 'src/styles/mixins';
 
 .bsm-list-box-wrapper {
-    @include textGlobalStyle();
     .zebra-list .p-listbox-item {
         background-color: palette(white, 100); /* Set the background color for even-numbered items */
     }
@@ -19,9 +18,26 @@
         border: none;
     }
 
+    .p-listbox .p-listbox-list .p-listbox-item {
+        @include textGlobalStyle();
+
+        margin: 0;
+        padding: 0.25rem 0.25rem;
+        border: 0 none;
+        transition: box-shadow 0.2s;
+        border-radius: 0;
+        line-height: normal;
+    }
+
     .p-listbox:not(.p-disabled) .p-listbox-item:not(.p-highlight):not(.p-disabled) {
+        @include linkGlobalStyle();
         &:hover {
-            color: palette(backgroundhover, 100);
+            background-color: palette(cbackgroundhover, 100);
+        }
+
+        &:focus {
+            background-color: palette(black, 8) !important;
+            box-shadow: none;
         }
     }
 }
