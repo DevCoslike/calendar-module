@@ -5,6 +5,7 @@ import {useSelector} from 'react-redux'
 
 import {ErrorLoadingFailed} from '../../common/components/error-loading/error-loading-failed'
 import {BsmListBox} from '../../common/components/listbox/bsm-listbox'
+import {getTimeDifference, sortByDateAttribute} from '../../common/utils/date-utils'
 import {RootState} from '../../redux/reducers/reducers'
 import {ICalendarNotification} from '../../redux/schemas/CalendarNotification'
 
@@ -17,7 +18,11 @@ export const CalendarNotificationCard = () => {
     const {data, loading, error} = useSelector((state: RootState) => state.posts)
 
     const dataArr: ICalendarNotification[] = data?.value ?? []
-    const items = dataArr.map(item => ({label: item.Title, value: item}))
+    const items = sortByDateAttribute(dataArr, 'EventStartDate').map((item: ICalendarNotification) => {
+        const lblDisplay = item.Title + ' - ' + getTimeDifference(item.EventStartDate)
+
+        return {label: lblDisplay, value: item}
+    })
 
     if (loading === 'failed') {
         return <ErrorLoadingFailed error={error ?? ''} />
