@@ -22,7 +22,7 @@ export const BsmDialog: React.FC<DialogProps> = props => {
                 {...dialogProps}
                 id={elementId}
                 headerStyle={{height: DIALOG_HEADER_HEIGHT + 'vh', padding: 0}}
-                style={{maxWidth: '65vw', background: 'white'}}
+                style={{maxWidth: '60vw', background: 'white'}}
                 contentStyle={{
                     height: DIALOG_CONTENT_HEIGHT + 'vh',
                     padding: '0 16px',

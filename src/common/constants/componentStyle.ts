@@ -1,2 +1,2 @@
 export const DIALOG_HEADER_HEIGHT = 35
-export const DIALOG_CONTENT_HEIGHT = 45
+export const DIALOG_CONTENT_HEIGHT = 47

@@ -72,7 +72,7 @@ export const CalendarNotificationCard: React.FC = () => {
                 >
                     <CalendarNotificationDialogContent
                         selectedNotification={selectedNotification}
-                        dialogContentHeight={DIALOG_CONTENT_HEIGHT}
+                        dialogContentHeight={DIALOG_CONTENT_HEIGHT - 2}
                     />
                 </BsmDialog>
             )}
