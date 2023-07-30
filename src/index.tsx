@@ -11,7 +11,7 @@ import ReactDOM from 'react-dom/client'
 import {Provider} from 'react-redux'
 
 import App from './App'
-import {CalendarNotificationCard} from './features/calendar-notification-card/calendar-notification-card'
+import {CalendarNotificationCard} from './features/calendar-notification/card/calendar-notification-card'
 import store from './redux/store'
 import reportWebVitals from './reportWebVitals'
 

@@ -1,13 +1,13 @@
 @import 'src/styles/color-palette';
 
+// this is a technique that can hide or show a scrollbar upon hover
 .y-axis-scroller-wrapper {
-    // this is an illusion that can hide or show a scrollbar
     ::-webkit-scrollbar-thumb {
         background: inherit;
         border: none;
     }
-    // by activating this code scrollbar is visible when mouse hover over html element
 
+    // By activating this code scrollbar is completely hided and is visible ONLY when mouse hover over html element
     // ::-webkit-scrollbar-track {
     //     border-radius: 0px;
     //     background: inherit;

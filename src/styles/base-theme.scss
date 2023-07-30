@@ -58,6 +58,10 @@ h2,
     @include linkGlobalStyle();
 }
 
+a {
+    @include linkGlobalStyle();
+}
+
 @keyframes App-logo-spin {
     from {
         transform: rotate(0deg);
