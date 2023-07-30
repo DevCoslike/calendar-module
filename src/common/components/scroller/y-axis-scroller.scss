@@ -1,6 +1,18 @@
-@import '~@portal/portal-components/styles/color-palette';
+@import 'src/styles/color-palette';
 
 .y-axis-scroller-wrapper {
+    // this is an illusion that can hide or show a scrollbar
+    ::-webkit-scrollbar-thumb {
+        background: inherit;
+        border: none;
+    }
+    // by activating this code scrollbar is visible when mouse hover over html element
+
+    // ::-webkit-scrollbar-track {
+    //     border-radius: 0px;
+    //     background: inherit;
+    // }
+
     &:hover {
         *::-webkit-scrollbar {
             width: 0.25em;

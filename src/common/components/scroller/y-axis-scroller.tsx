@@ -1,8 +1,8 @@
-import { useResizeObserver } from '../../hooks/useResizeObserver'
 import './y-axis-scroller.scss'
 
 import React, {ReactNode, useRef} from 'react'
 
+import {useResizeObserver} from '../../hooks/useResizeObserver'
 
 interface IYAxisScroller {
     elementId: string
@@ -17,7 +17,9 @@ const YAxisScroller: React.FC<IYAxisScroller> = props => {
     const divElementRef = useRef<HTMLDivElement>(null)
     const [parentHeight] = useResizeObserver(divElementRef, true, true)
 
-  
+    if (typeof children === 'string') {
+    }
+
     return (
         <div className="y-axis-scroller-wrapper" ref={divElementRef}>
             <div
@@ -28,7 +30,7 @@ const YAxisScroller: React.FC<IYAxisScroller> = props => {
                     overflowY: 'auto',
                 }}
                 id={elementId}
-                key={elementId+'_key'}
+                key={elementId + '_key'}
             >
                 {children}
             </div>

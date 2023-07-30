@@ -1,5 +1,7 @@
 import {ICalendarNotification} from '../../redux/schemas/CalendarNotification'
 
+const DAYS_FRIENDLY_MSG_THRESHOLD = 7
+
 function formatDateToDDMMYYYY(inputDateStr: string): string {
     const inputDate = new Date(inputDateStr)
     const day = inputDate.getUTCDate().toString().padStart(2, '0')
@@ -8,6 +10,11 @@ function formatDateToDDMMYYYY(inputDateStr: string): string {
     return `${day}/${month}/${year}`
 }
 
+/**
+ * this getTimeDifference is responsible for consuming a date format and produce a user friendly output
+ * @param inputDateStr date format to string
+ * @returns a string of a date or a message with time description
+ */
 export function getTimeDifference(inputDateStr: string): string {
     const inputDate = new Date(inputDateStr)
     const currentDate = new Date()
@@ -19,7 +26,7 @@ export function getTimeDifference(inputDateStr: string): string {
 
     if (timeDifference > 0) {
         // check in how many days range
-        if (timeDifference <= 3 * msPerDay) {
+        if (timeDifference <= DAYS_FRIENDLY_MSG_THRESHOLD * msPerDay) {
             // Calculate the number of days
             const daysDifference = Math.ceil(timeDifference / msPerDay)
             return `in ${daysDifference} day${daysDifference === 1 ? '' : 's'}`
@@ -28,6 +35,8 @@ export function getTimeDifference(inputDateStr: string): string {
             const hoursDifference = Math.ceil(timeDifference / msPerHour)
             return `in ${hoursDifference} hour${hoursDifference === 1 ? '' : 's'}`
         }
+    } else if (inputDate.getTime() < currentDate.getTime()) {
+        return `${formatDateToDDMMYYYY(inputDateStr)} (pass date)`
     }
 
     return formatDateToDDMMYYYY(inputDateStr)
@@ -38,6 +47,12 @@ function isValidDate(dateStr: string): boolean {
     return date instanceof Date && !isNaN(date.getTime())
 }
 
+/**
+ * sortByDateAttribute is responsible to sort our notification in ascending order pass to future
+ * @param arr this is an array of objects type ICalendarNotification
+ * @param dateAttributeName
+ * @returns sorted array of objects type ICalendarNotification
+ */
 export function sortByDateAttribute(arr: ICalendarNotification[], dateAttributeName: string): ICalendarNotification[] {
     const sortedArray = [...arr] // Create a copy of the original array to avoid modifying it
 

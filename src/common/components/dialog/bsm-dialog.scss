@@ -1,0 +1,21 @@
+@import 'src/styles/color-palette';
+@import 'src/styles/mixins';
+
+// Cannot wrap it in the wrapper classes as its appended in the body and the styles won't apply
+.p-dialog.p-component {
+    box-shadow: 0 8px 30px 0 palette(black, 20);
+    border-radius: 8px;
+
+    .p-dialog-header {
+        .p-dialog-title {
+        }
+    }
+
+    .p-dialog-content {
+        .p-dialog-subheader {
+        }
+    }
+
+    .p-dialog-footer {
+    }
+}

@@ -1,5 +1,13 @@
-import {useLayoutEffect, useState, useCallback, RefObject} from 'react'
+import {RefObject, useCallback, useLayoutEffect, useState} from 'react'
 
+/**
+ * useResizeObserver is a custom hook taking information of sizes based on the surroundings of an element
+ * @param ref is the main element for measuring the height
+ * @param getHeightOnly no need for width
+ * @param checkParentElement is the secondary element for measuring the height if main does not has a fixed height
+ * @param callback utility callback
+ * @returns
+ */
 export const useResizeObserver = (
     ref: RefObject<HTMLElement>,
     getHeightOnly?: boolean,

@@ -3,16 +3,21 @@ import './calendar-notification-card.scss'
 import {useEffect, useState} from 'react'
 import {useSelector} from 'react-redux'
 
+import {BsmDialog} from '../../common/components/dialog/bsm-dialog'
 import {ErrorLoadingFailed} from '../../common/components/error-loading/error-loading-failed'
 import {BsmListBox} from '../../common/components/listbox/bsm-listbox'
+import YAxisScroller from '../../common/components/scroller/y-axis-scroller'
+import useToggle from '../../common/hooks/useToggle'
 import {getTimeDifference, sortByDateAttribute} from '../../common/utils/date-utils'
 import {RootState} from '../../redux/reducers/reducers'
 import {ICalendarNotification} from '../../redux/schemas/CalendarNotification'
 
 export const CalendarNotificationCard = () => {
     const [selectedItem, setSelectedItem] = useState<ICalendarNotification | null>()
+    const [visible, setVisible] = useState<boolean>(false)
     useEffect(() => {
         console.log(selectedItem)
+        setVisible(true)
     }, [selectedItem])
 
     const {data, loading, error} = useSelector((state: RootState) => state.posts)
@@ -47,6 +52,17 @@ export const CalendarNotificationCard = () => {
                     />
                 </div>
             </div>
+            <BsmDialog
+                visible={visible}
+                style={{width: '25vw', minWidth: '305px', minHeight: '105px'}}
+                onHide={() => setVisible(false)}
+                closable={true}
+                elementId="BSM"
+                header="My dialog"
+                modal={true}
+            >
+                <YAxisScroller children={selectedItem?.Description} elementId="bsm-scroller" scrollHeight={105} />
+            </BsmDialog>
         </div>
     ) : (
         <></>

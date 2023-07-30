@@ -6,8 +6,12 @@ export interface ListBoxProps extends PrimeListBoxProps {
     elementId: string
     isZebraStyledList?: boolean
 }
-
-export const BsmListBox: React.FC<ListBoxProps> = (props: ListBoxProps) => {
+/**
+ * This is a wrapper component utilizing primereact library components in order to be fully customized
+ * @param props
+ * @returns a list component
+ */
+export const BsmListBox: React.FC<ListBoxProps> = props => {
     const {elementId, isZebraStyledList = true, ...listBoxProps} = props
     return (
         <div className="bsm-list-box-wrapper">
