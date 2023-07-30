@@ -16,6 +16,23 @@ const CalendarNotificationDialogContent: React.FC<ICalendarNotificationDialogCon
         selectedNotification
     const windowSize = useWindowSize()
 
+    const createAddressString = (): string => {
+        const addressParts: string[] = []
+        const validString = (strVal): boolean => {
+            return strVal && strVal.trim() !== ''
+        }
+
+        validString(AddressLine1) && addressParts.push(AddressLine1.trim())
+        validString(AddressLine2) && addressParts.push(AddressLine2.trim())
+        validString(City) && addressParts.push(City.trim())
+        validString(PostCode) && addressParts.push(PostCode.trim())
+        validString(Country) && addressParts.push(Country.trim())
+
+        const addressString = addressParts.join('</br>')
+
+        return addressString
+    }
+
     const DialogRightContent: React.FC = () => {
         return (
             <div className="d-flex flex-column">
@@ -29,7 +46,7 @@ const CalendarNotificationDialogContent: React.FC<ICalendarNotificationDialogCon
                 <div className="pt-5" />
                 <CalendarNotificationDialogSection
                     title="Location"
-                    content="cos"
+                    content={createAddressString()}
                     buttonContent="View Map"
                     buttonLinkAction={() => {}}
                     key="section-2"
