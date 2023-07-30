@@ -12,26 +12,27 @@ interface ICalendarNotificationDialogContent {
 
 const CalendarNotificationDialogContent: React.FC<ICalendarNotificationDialogContent> = props => {
     const {selectedNotification, dialogContentHeight} = props
-    const {EventStartDate, EventEndDate, FullDayEvent} = selectedNotification
+    const {EventStartDate, EventEndDate, FullDayEvent, AddressLine1, Country, AddressLine2, PostCode, City} =
+        selectedNotification
     const windowSize = useWindowSize()
 
     const DialogRightContent: React.FC = () => {
         return (
             <div className="d-flex flex-column">
                 <CalendarNotificationDialogSection
-                    buttonContent="test12"
-                    content={getAllDatesInRangeWithLineBreak(EventStartDate, EventEndDate, FullDayEvent === 'TRUE')}
+                    title="Date and time"
+                    content={getAllDatesInRangeWithLineBreak(EventStartDate, EventEndDate, FullDayEvent === '')}
+                    buttonContent="Add to Calendar"
                     buttonLinkAction={() => {}}
                     key="section-1"
-                    title="test"
                 />
                 <div className="pt-5" />
                 <CalendarNotificationDialogSection
-                    buttonContent="cos"
+                    title="Location"
                     content="cos"
+                    buttonContent="View Map"
                     buttonLinkAction={() => {}}
                     key="section-2"
-                    title="cos"
                 />
             </div>
         )
@@ -47,7 +48,7 @@ const CalendarNotificationDialogContent: React.FC<ICalendarNotificationDialogCon
                         scrollHeight={windowSize.height * (dialogContentHeight / 100)}
                     />
                 </div>
-                <div className="col">
+                <div className="col px-0">
                     <BsmScrollPanel
                         elementId="rightScrollPanel"
                         children={<DialogRightContent />}

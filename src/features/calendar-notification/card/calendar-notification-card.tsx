@@ -6,14 +6,12 @@ import {useSelector} from 'react-redux'
 import {BsmDialog} from '../../../common/components/dialog/bsm-dialog'
 import {ErrorLoadingFailed} from '../../../common/components/error-loading/error-loading-failed'
 import {BsmListBox} from '../../../common/components/listbox/bsm-listbox'
+import {DIALOG_CONTENT_HEIGHT, DIALOG_HEADER_HEIGHT} from '../../../common/constants/componentStyle'
 import {getTimeDifference, sortByDateAttribute} from '../../../common/utils/date-utils'
 import {RootState} from '../../../redux/reducers/reducers'
 import {ICalendarNotification} from '../../../redux/schemas/CalendarNotification'
 import CalendarNotificationDialogContent from '../dialog/content/calendr-notification-dialog-content'
 import CalendarNotificationDialogHeader from '../dialog/header/calendar-notification-dialog-header'
-
-const DIALOG_HEADER_HEIGHT = 35
-const DIALOG_CONTENT_HEIGHT = 45
 
 export const CalendarNotificationCard: React.FC = () => {
     const [selectedNotification, setSelectedNotification] = useState<ICalendarNotification | null>()
@@ -61,18 +59,15 @@ export const CalendarNotificationCard: React.FC = () => {
                     appendTo={document.body}
                     focusOnShow={false}
                     closeOnEscape={true}
-                    style={{maxWidth: '65vw', background: 'white'}}
                     onHide={() => setVisible(false)}
                     closable={true}
                     elementId="BSMDialog"
-                    headerStyle={{height: DIALOG_HEADER_HEIGHT + 'vh', padding: 0}}
                     header={
                         <CalendarNotificationDialogHeader
                             selectedNotification={selectedNotification}
                             dialogHeaderHeight={DIALOG_HEADER_HEIGHT}
                         />
                     }
-                    contentStyle={{height: DIALOG_CONTENT_HEIGHT + 'vh', paddingBottom: 0, marginTop: '1rem'}}
                     draggable={false}
                 >
                     <CalendarNotificationDialogContent

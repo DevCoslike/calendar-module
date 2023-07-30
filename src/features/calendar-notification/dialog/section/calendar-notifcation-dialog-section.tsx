@@ -7,7 +7,7 @@ interface ICalendarNotificationDialogSection {
 }
 const CalendarNotificationDialogSection: React.FC<ICalendarNotificationDialogSection> = props => {
     return (
-        <div className="container">
+        <div className="container p-0">
             <div className="row">
                 <h2>{props.title.toUpperCase()}</h2>
             </div>
