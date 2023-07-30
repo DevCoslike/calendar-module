@@ -11,8 +11,8 @@ const CalendarNotificationDialogSection: React.FC<ICalendarNotificationDialogSec
             <div className="row">
                 <h2>{props.title.toUpperCase()}</h2>
             </div>
-            <div className="row py-2">
-                <p>{props.content}</p>
+            <div className="row pt-3">
+                <p dangerouslySetInnerHTML={{__html: props.content?.toString() ?? ''}} />
             </div>
             <div className="row">
                 <a href="#" onClick={props.buttonLinkAction}>

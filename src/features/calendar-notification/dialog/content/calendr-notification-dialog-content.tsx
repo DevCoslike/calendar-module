@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import BsmScrollPanel from '../../../../common/components/scroll-panel/bsm-scroll-panel'
 import {useWindowSize} from '../../../../common/hooks/useWindowSize'
+import {getAllDatesInRangeWithLineBreak} from '../../../../common/utils/date-utils'
 import {ICalendarNotification} from '../../../../redux/schemas/CalendarNotification'
 import CalendarNotificationDialogSection from '../section/calendar-notifcation-dialog-section'
 
@@ -11,6 +12,7 @@ interface ICalendarNotificationDialogContent {
 
 const CalendarNotificationDialogContent: React.FC<ICalendarNotificationDialogContent> = props => {
     const {selectedNotification, dialogContentHeight} = props
+    const {EventStartDate, EventEndDate, FullDayEvent} = selectedNotification
     const windowSize = useWindowSize()
 
     const DialogRightContent: React.FC = () => {
@@ -18,7 +20,7 @@ const CalendarNotificationDialogContent: React.FC<ICalendarNotificationDialogCon
             <div className="d-flex flex-column">
                 <CalendarNotificationDialogSection
                     buttonContent="test12"
-                    content="test12"
+                    content={getAllDatesInRangeWithLineBreak(EventStartDate, EventEndDate, FullDayEvent === 'TRUE')}
                     buttonLinkAction={() => {}}
                     key="section-1"
                     title="test"

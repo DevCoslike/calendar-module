@@ -89,12 +89,45 @@ export function getDayFromDate(inputDateStr: string): string {
     return day
 }
 
-export function getMonthAbbreviation(inputDateStr: string): string {
+function getAbbreviatedDayName(dateString: string): string {
+    const date = new Date(dateString)
+    return date.toLocaleString('en-US', {weekday: 'short'})
+}
+
+export function getMonthAbbreviation(inputDateStr: string, toUpperCase: boolean = true): string {
     // Create a Date object from the formatted date string
     const date = new Date(inputDateStr)
 
     // Get the month abbreviation (e.g., "FEB") using Intl.DateTimeFormat
     const monthAbbreviation = new Intl.DateTimeFormat('en', {month: 'short'}).format(date)
 
-    return monthAbbreviation.toUpperCase()
+    return toUpperCase ? monthAbbreviation.toUpperCase() : monthAbbreviation
+}
+function formatDateToDateAndTime(inputDateStr: string, fullDayEvent: boolean = false): string {
+    const inputDate = new Date(inputDateStr)
+    const day = getDayFromDate(inputDateStr)
+    const year = inputDate.getUTCFullYear().toString()
+    return `${getAbbreviatedDayName(inputDateStr)}, ${day} ${getMonthAbbreviation(inputDateStr, false)} ${year} ${
+        fullDayEvent ? ' - Full Day Event' : ''
+    }`
+}
+export function getAllDatesInRangeWithLineBreak(
+    startDateStr: string,
+    endDateStr: string,
+    fullDayEvent: boolean = false
+): string {
+    if (!isValidDate(startDateStr) || !isValidDate(startDateStr)) {
+        return 'N/A date range'
+    }
+
+    const datesInRange: string[] = []
+    const currentDate = new Date(startDateStr)
+    const endDate = new Date(endDateStr)
+
+    while (currentDate <= endDate) {
+        datesInRange.push(`${formatDateToDateAndTime(currentDate.toISOString(), fullDayEvent)}</br>`)
+        currentDate.setDate(currentDate.getDate() + 1)
+    }
+
+    return datesInRange.join('')
 }
