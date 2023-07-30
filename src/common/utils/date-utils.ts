@@ -42,7 +42,7 @@ export function getTimeDifference(inputDateStr: string): string {
     return formatDateToDDMMYYYY(inputDateStr)
 }
 
-function isValidDate(dateStr: string): boolean {
+export function isValidDate(dateStr: string): boolean {
     const date = new Date(dateStr)
     return date instanceof Date && !isNaN(date.getTime())
 }

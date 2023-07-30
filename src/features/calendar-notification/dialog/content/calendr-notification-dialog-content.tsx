@@ -1,7 +1,10 @@
+import {saveAs} from 'file-saver'
+
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import BsmScrollPanel from '../../../../common/components/scroll-panel/bsm-scroll-panel'
 import {useWindowSize} from '../../../../common/hooks/useWindowSize'
-import {getAllDatesInRangeWithLineBreak} from '../../../../common/utils/date-utils'
+import {getAllDatesInRangeWithLineBreak, isValidDate} from '../../../../common/utils/date-utils'
+import {generateICS} from '../../../../common/utils/generateFiles'
 import {ICalendarNotification} from '../../../../redux/schemas/CalendarNotification'
 import CalendarNotificationDialogSection from '../section/calendar-notifcation-dialog-section'
 
@@ -12,7 +15,7 @@ interface ICalendarNotificationDialogContent {
 
 const CalendarNotificationDialogContent: React.FC<ICalendarNotificationDialogContent> = props => {
     const {selectedNotification, dialogContentHeight} = props
-    const {EventStartDate, EventEndDate, FullDayEvent, AddressLine1, Country, AddressLine2, PostCode, City} =
+    const {EventStartDate, EventEndDate, FullDayEvent, AddressLine1, Country, AddressLine2, PostCode, City, Title} =
         selectedNotification
     const windowSize = useWindowSize()
 
@@ -29,8 +32,21 @@ const CalendarNotificationDialogContent: React.FC<ICalendarNotificationDialogCon
         validString(Country) && addressParts.push(Country?.trim())
 
         const addressString = addressParts.join('</br>')
-
         return addressString
+    }
+
+    const handleDownloadICS = () => {
+        if (isValidDate(EventStartDate) && isValidDate(EventEndDate)) {
+            const timeDifference = new Date(EventStartDate).getTime() - new Date(EventEndDate).getTime()
+            const msPerDay = 24 * 60 * 60 * 1000 // Number of milliseconds in a day
+            const daysDifference = Math.ceil(timeDifference / msPerDay)
+            const strDate = new Date(EventStartDate)
+            const icsFileContent = generateICS(strDate, daysDifference, Title, City + ' - ' + Country)
+            if (icsFileContent) {
+                const blob = new Blob([icsFileContent], {type: 'text/plain;charset=utf-8'})
+                saveAs(blob, 'event.ics')
+            }
+        }
     }
 
     return (
@@ -62,7 +78,7 @@ const CalendarNotificationDialogContent: React.FC<ICalendarNotificationDialogCon
                                         FullDayEvent === ''
                                     )}
                                     buttonContent="Add to Calendar"
-                                    buttonLinkAction={() => {}}
+                                    buttonLinkAction={handleDownloadICS}
                                     key="section-1"
                                 />
                                 <div className="pt-4" />
