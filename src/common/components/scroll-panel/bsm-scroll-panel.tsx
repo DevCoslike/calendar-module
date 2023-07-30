@@ -33,7 +33,7 @@ const BsmScrollPanel: React.FC<IBsmScrollPanel> = props => {
                 key={elementId + '_key'}
             >
                 {isChildrenStringWithHTMLTags() ? (
-                    <div dangerouslySetInnerHTML={{__html: children?.toString() ?? ''}} />
+                    <div className="bsm-auto-height" dangerouslySetInnerHTML={{__html: children?.toString() ?? ''}} />
                 ) : (
                     children
                 )}

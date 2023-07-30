@@ -1,6 +1,8 @@
 @import 'src/styles/color-palette';
 @import 'src/styles/mixins';
 
+$enable-negative-margins: true;
+
 .bsm-auto-height {
     height: auto !important;
 }

@@ -13,9 +13,13 @@ import {RootState} from '../../../redux/reducers/reducers'
 import {ICalendarNotification} from '../../../redux/schemas/CalendarNotification'
 import {CalendarNotificationDialogHeader} from '../dialog/header/calendar-notification-dialog-header'
 
+const DIALOG_HEADER_HEIGHT = 40
+const DIALOG_CONTENT_HEIGHT = 45
+
 export const CalendarNotificationCard: React.FC = () => {
     const [selectedNotification, setSelectedNotification] = useState<ICalendarNotification | null>()
     const [visible, setVisible] = useState<boolean>(false)
+    const windowSize = useWindowSize()
     useEffect(() => {
         console.log(selectedNotification)
     }, [selectedNotification])
@@ -56,21 +60,27 @@ export const CalendarNotificationCard: React.FC = () => {
             {selectedNotification && (
                 <BsmDialog
                     visible={visible}
-                    style={{maxWidth: '55vw'}}
+                    style={{maxWidth: '65vw', background: 'white'}}
                     onHide={() => setVisible(false)}
                     closable={true}
-                    elementId="BSM"
-                    header={<CalendarNotificationDialogHeader selectedNotification={selectedNotification} />}
-                    headerStyle={{maxHeight: '35vh'}}
-                    contentStyle={{maxHeight: '25vh'}}
+                    elementId="BSMDialog"
+                    headerStyle={{height: DIALOG_HEADER_HEIGHT + 'vh', padding: 0}}
+                    header={
+                        <CalendarNotificationDialogHeader
+                            selectedNotification={selectedNotification}
+                            dialogHeaderHeight={DIALOG_HEADER_HEIGHT}
+                        />
+                    }
+                    contentStyle={{height: DIALOG_CONTENT_HEIGHT + 'vh', paddingBottom: 0, marginTop: '20px'}}
+                    draggable={false}
                 >
-                    <div className="container ">
+                    <div className="container-fluid p-0">
                         <div className="row">
-                            <div className="col-9">
+                            <div className="col-8">
                                 <BsmScrollPanel
                                     elementId="descScrollPanel"
                                     children={selectedNotification?.Description}
-                                    scrollHeight={100}
+                                    scrollHeight={windowSize.height * (DIALOG_CONTENT_HEIGHT / 100)}
                                 />
                             </div>
                             <div className="col">{selectedNotification?.Author}</div>

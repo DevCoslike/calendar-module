@@ -4,7 +4,7 @@ const DAYS_FRIENDLY_MSG_THRESHOLD = 7
 
 function formatDateToDDMMYYYY(inputDateStr: string): string {
     const inputDate = new Date(inputDateStr)
-    const day = inputDate.getUTCDate().toString().padStart(2, '0')
+    const day = getDayFromDate(inputDateStr)
     const month = (inputDate.getUTCMonth() + 1).toString().padStart(2, '0')
     const year = inputDate.getUTCFullYear().toString()
     return `${day}/${month}/${year}`
@@ -77,4 +77,24 @@ export function sortByDateAttribute(arr: ICalendarNotification[], dateAttributeN
     filteredArray.sort(compareDates)
 
     return filteredArray
+}
+
+export function getDayFromDate(inputDateStr: string): string {
+    // Create a Date object from the formatted date string
+    const inputDSate = new Date(inputDateStr)
+
+    // Get the day of the month (1 to 31)
+    const day = inputDSate.getUTCDate().toString().padStart(2, '0')
+
+    return day
+}
+
+export function getMonthAbbreviation(inputDateStr: string): string {
+    // Create a Date object from the formatted date string
+    const date = new Date(inputDateStr)
+
+    // Get the month abbreviation (e.g., "FEB") using Intl.DateTimeFormat
+    const monthAbbreviation = new Intl.DateTimeFormat('en', {month: 'short'}).format(date)
+
+    return monthAbbreviation.toUpperCase()
 }
