@@ -6,17 +6,19 @@ import {useSelector} from 'react-redux'
 import {BsmDialog} from '../../../common/components/dialog/bsm-dialog'
 import {ErrorLoadingFailed} from '../../../common/components/error-loading/error-loading-failed'
 import {BsmListBox} from '../../../common/components/listbox/bsm-listbox'
-import YAxisScroller from '../../../common/components/scroller/y-axis-scroller'
+import BsmScrollPanel from '../../../common/components/scroll-panel/bsm-scroll-panel'
+import {useWindowSize} from '../../../common/hooks/useWindowSize'
 import {getTimeDifference, sortByDateAttribute} from '../../../common/utils/date-utils'
 import {RootState} from '../../../redux/reducers/reducers'
 import {ICalendarNotification} from '../../../redux/schemas/CalendarNotification'
+import {CalendarNotificationDialogHeader} from '../dialog/header/calendar-notification-dialog-header'
 
-export const CalendarNotificationCard = () => {
-    const [selectedItem, setSelectedItem] = useState<ICalendarNotification | null>()
+export const CalendarNotificationCard: React.FC = () => {
+    const [selectedNotification, setSelectedNotification] = useState<ICalendarNotification | null>()
     const [visible, setVisible] = useState<boolean>(false)
     useEffect(() => {
-        console.log(selectedItem)
-    }, [selectedItem])
+        console.log(selectedNotification)
+    }, [selectedNotification])
 
     const {data, loading, error} = useSelector((state: RootState) => state.posts)
 
@@ -45,23 +47,37 @@ export const CalendarNotificationCard = () => {
                         elementId="lsBoxItems"
                         options={items}
                         onClick={() => setVisible(true)}
-                        onChange={e => setSelectedItem(e.value)}
+                        onChange={e => setSelectedNotification(e.value)}
                         style={{maxWidth: '380px'}}
                         listStyle={{maxHeight: '230px'}}
                     />
                 </div>
             </div>
-            <BsmDialog
-                visible={visible}
-                style={{width: '75vw', height: '80vh'}}
-                onHide={() => setVisible(false)}
-                closable={true}
-                elementId="BSM"
-                header="My dialog"
-                appendTo={document.body}
-            >
-                <YAxisScroller children={selectedItem?.Description} elementId="bsm-scroller" scrollHeight={105} />
-            </BsmDialog>
+            {selectedNotification && (
+                <BsmDialog
+                    visible={visible}
+                    style={{maxWidth: '55vw'}}
+                    onHide={() => setVisible(false)}
+                    closable={true}
+                    elementId="BSM"
+                    header={<CalendarNotificationDialogHeader selectedNotification={selectedNotification} />}
+                    headerStyle={{maxHeight: '35vh'}}
+                    contentStyle={{maxHeight: '25vh'}}
+                >
+                    <div className="container ">
+                        <div className="row">
+                            <div className="col-9">
+                                <BsmScrollPanel
+                                    elementId="descScrollPanel"
+                                    children={selectedNotification?.Description}
+                                    scrollHeight={100}
+                                />
+                            </div>
+                            <div className="col">{selectedNotification?.Author}</div>
+                        </div>
+                    </div>
+                </BsmDialog>
+            )}
         </div>
     ) : (
         <></>

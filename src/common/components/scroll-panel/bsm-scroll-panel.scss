@@ -1,0 +1,14 @@
+@import 'src/styles/color-palette';
+
+.bsm-scroll-panel-wrapper {
+    .p-scrollpanel-bar {
+        background: palette(black, 30) !important;
+        border: 0 none;
+    }
+    .p-scrollpanel-bar .p-scrollpanel-content {
+        padding: 0 1rem 1rem 0;
+    }
+    .p-scrollpanel-bar-y {
+        width: 4px !important;
+    }
+}

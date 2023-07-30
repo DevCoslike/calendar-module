@@ -1,15 +1,18 @@
 @import 'src/styles/color-palette';
 @import 'src/styles/mixins';
 
+.bsm-auto-height {
+    height: auto !important;
+}
+
 h2,
 .h2 {
-    font-size: 1.25rem;
-    font-weight: 600;
+    @include h2GlobalStyle();
 }
 
 .h2i {
     font-weight: 600;
-    font-size: 18;
+    font-size: 18px;
 }
 
 *::-webkit-scrollbar {

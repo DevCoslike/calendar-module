@@ -12,3 +12,7 @@ $font-size: 0.875rem;
         color: palette(clinkhover, 100);
     }
 }
+@mixin h2GlobalStyle {
+    font-weight: 600;
+    font-size: 1.25rem;
+}
