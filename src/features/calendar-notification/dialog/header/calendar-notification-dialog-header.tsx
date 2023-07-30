@@ -7,7 +7,7 @@ interface ICalendarNotificationDialogHeader {
     selectedNotification: ICalendarNotification
     dialogHeaderHeight: number
 }
-export const CalendarNotificationDialogHeader: React.FC<ICalendarNotificationDialogHeader> = props => {
+const CalendarNotificationDialogHeader: React.FC<ICalendarNotificationDialogHeader> = props => {
     const {EventStartDate, Title, Category, BannerUrl} = props.selectedNotification
     const windowSize = useWindowSize()
     const getPercentageHeight = () => {
@@ -42,3 +42,5 @@ export const CalendarNotificationDialogHeader: React.FC<ICalendarNotificationDia
         </div>
     )
 }
+
+export default CalendarNotificationDialogHeader
