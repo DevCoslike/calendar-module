@@ -1,7 +1,7 @@
-import BsmImage from '../../../../common/components/image/bsm-image'
-import {useWindowSize} from '../../../../common/hooks/useWindowSize'
-import {getDayFromDate, getMonthAbbreviation} from '../../../../common/utils/date-utils'
-import {ICalendarNotification} from '../../../../redux/schemas/CalendarNotification'
+import BsmImage from '../../../common/components/image/bsm-image'
+import {useWindowSize} from '../../../common/hooks/useWindowSize'
+import {getDayFromDate, getMonthAbbreviation} from '../../../common/utils/date-utils'
+import {ICalendarNotification} from '../../../redux/schemas/CalendarNotification'
 
 interface ICalendarNotificationDialogHeader {
     selectedNotification: ICalendarNotification

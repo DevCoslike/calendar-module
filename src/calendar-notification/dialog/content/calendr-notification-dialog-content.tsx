@@ -1,11 +1,11 @@
 import {saveAs} from 'file-saver'
 
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import BsmScrollPanel from '../../../../common/components/scroll-panel/bsm-scroll-panel'
-import {useWindowSize} from '../../../../common/hooks/useWindowSize'
-import {getAllDatesInRangeWithLineBreak, isValidDate} from '../../../../common/utils/date-utils'
-import {generateICS} from '../../../../common/utils/generateFiles'
-import {ICalendarNotification} from '../../../../redux/schemas/CalendarNotification'
+import BsmScrollPanel from '../../../common/components/scroll-panel/bsm-scroll-panel'
+import {useWindowSize} from '../../../common/hooks/useWindowSize'
+import {getAllDatesInRangeWithLineBreak, isValidDate} from '../../../common/utils/date-utils'
+import {generateICS} from '../../../common/utils/generateFiles'
+import {ICalendarNotification} from '../../../redux/schemas/CalendarNotification'
 import CalendarNotificationDialogSection from '../section/calendar-notifcation-dialog-section'
 
 interface ICalendarNotificationDialogContent {
