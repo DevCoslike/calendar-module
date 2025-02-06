@@ -1,6 +1,5 @@
 module.exports = {
-    plugins: ['formatjs', 'html', "react"],
-    // extends: ['plugin:prettier/recommended'],
+    plugins: ['formatjs', 'html', 'react'],
     parser: '@typescript-eslint/parser',
     overrides: [
         {
@@ -18,7 +17,6 @@ module.exports = {
         '@typescript-eslint/no-explicit-any-catch': 'off',
         'react-hooks/exhaustive-deps': 'off',
         'formatjs/no-offset': 'error',
-        // 'prettier/prettier': 'error',
         'react/jsx-uses-react': 'error',
         'react/jsx-uses-vars': 'error',
     },
