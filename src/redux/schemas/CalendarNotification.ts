@@ -16,4 +16,5 @@ export interface ICalendarNotification {
     Editor: string
     Created: string
     Modified: string
+    [key: string]: any
 }

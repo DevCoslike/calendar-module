@@ -21,7 +21,7 @@ const CalendarNotificationDialogContent: React.FC<ICalendarNotificationDialogCon
 
     const createAddressString = (): string => {
         const addressParts: string[] = []
-        const validString = (strVal): boolean => {
+        const validString = (strVal: string): boolean => {
             return typeof strVal === 'string' ? !!(strVal && strVal.trim() !== '') : false
         }
 
