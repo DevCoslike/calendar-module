@@ -1,5 +1,5 @@
-@import 'src/styles/color-palette';
-@import 'src/styles/mixins';
+@import '../../../styles/color-palette';
+@import '../../../styles/mixins';
 
 // Cannot wrap it in the wrapper classes as its appended in the body and the styles won't apply
 .p-dialog.p-component {

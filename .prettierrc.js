@@ -20,5 +20,5 @@ module.exports = {
             },
         },
     ],
-    plugins: ["prettier-plugin-import-sort"]
+    plugins: ['prettier-plugin-import-sort'],
 }

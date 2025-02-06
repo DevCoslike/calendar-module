@@ -1,5 +1,5 @@
-@import 'src/styles/color-palette';
-@import 'src/styles/mixins';
+@import '../../styles/color-palette';
+@import '../../styles/mixins';
 
 .calendar-notification-card-wrapper {
     position: fixed; /* or "absolute" if you want it to scroll with the page */
